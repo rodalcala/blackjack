@@ -56,7 +56,7 @@ function blackjack() {
 
   // Generamos y mostramos las dos primeras cartas de PL;
 
-  function plThirdCard() {
+  function plGame() {
     if (plScore() === 21) {
       console.log('Blackjack!')
     } else {
@@ -82,34 +82,8 @@ function blackjack() {
     return plCards;
   }
 
-  console.log(plThirdCard());
+  console.log(plGame());
   console.log(plScore());
-
-  // A menos que hagamos blackjack, la app siempre le da la opcion PL
-  // de sacar una tercer carta.
-  // Quizas aca podria hacer algo para que si PL hace blackjack se saltee
-  // plNextCard() porque no es necesaria. (si bien si se ejecuta no hay
-  // drama porque simplemente devuelve que llegaste a 21, pero...)
-
-  // function plNextCard() {
-  //   if (plScore() > 21) {
-  //     console.log("You've lost.")
-  //   } else if (plScore() === 21) {
-  //     console.log('You made it to 21! lets see...')
-  //   } else {
-  //     let next = window.confirm('Would you like another card?')
-  //     if (next) {
-  //       let nextPl = Math.floor(Math.random() * 12) + 1;
-  //       console.log(nextPl);
-  //       plCards.push(nextPl);
-  //       plNextCard();
-  //     }
-  //   }
-  //   return plCards;
-  // }
-
-  // console.log(plNextCard());
-  // console.log(plScore());
 
   // Buenooooo, parece que me salio la recursive function!
   // Con esto terminariamos la mano del PL y empezariamos la del DL.
@@ -122,6 +96,10 @@ function blackjack() {
       console.log(nextDl);
       dlCards.push(nextDl);
       if (dlScore() === 21 || dlScore() === plScore()) {
+        // el problema que tengo aca es que el DL tiene solamente una chance
+        // para empatar (y por tanto ganar) cuando PL hace blackjack,
+        // y con este codigo si llega a 21 sin hacer blackjack, a pesar de
+        // que PL haya hecho blackjack, gana DL.
         console.log('The house wins!');
       } else if (dlScore() > 21) {
         console.log('The house loses!');
@@ -131,7 +109,7 @@ function blackjack() {
       } else if (dlScore() < 21 && dlScore() < plScore()) {
         console.log(dlScore())
         dlGame();
-      }  
+      }
     }
     return dlCards;
   }
