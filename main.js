@@ -28,14 +28,20 @@ function blackjack() {
     return score;
   };
 
-  function firstCard() {
+  // Hasta aca definimos las variables que van a contener las cartas de cada
+  // jugador y los puntajes de cada uno (que dependen de las cartas)
+  // Por ahora el as (1) = 11;
+
+  function dlFirstCard() {
     let firstDl = Math.floor(Math.random() * 12) + 1;
     dlCards.push(firstDl);
     return firstDl;
   }
 
-  console.log(firstCard());
+  console.log(dlFirstCard());
   console.log(dlScore());
+
+  // Generamos y mostramos la primer carta de DL;
 
   function plHand() {
     let firstPl = Math.floor(Math.random() * 12) + 1;
@@ -48,29 +54,78 @@ function blackjack() {
   console.log(plHand());
   console.log(plScore());
 
-  function thirdCard() {
-    let third = window.confirm('Would you like another card?')
-    if (third) {
-      let thirdPl = Math.floor(Math.random() * 12) + 1;
-      plCards.push(thirdPl);
+  // Generamos y mostramos las dos primeras cartas de PL;
+
+  function plThirdCard() {
+    if (plScore() === 21) {
+      console.log('Blackjack!')
+    } else {
+      let third = window.confirm('Would you like another card?')
+      if (third) {
+        let thirdPl = Math.floor(Math.random() * 12) + 1;
+        plCards.push(thirdPl);
+      }
     }
     return plCards;
   }
 
-  console.log(thirdCard());
+  console.log(plThirdCard());
   console.log(plScore());
 
-  // Aca creo que quiero hacer una recursive function para que a partir
-  // de la cuarta carta como que haga un loop preguntando si quiere otra
-  // carta hasta que diga que no o el score >= 21;
+  // A menos que hagamos blackjack, la app siempre le da la opcion PL
+  // de sacar una tercer carta.
+  // Quizas aca podria hacer algo para que si PL hace blackjack se saltee
+  // plNextCard() porque no es necesaria. (si bien si se ejecuta no hay
+  // drama porque simplemente devuelve que llegaste a 21, pero...)
 
-  // if (plScore() > 21) {
-  //   console.log("You've lost!")
-  // } else if (plScore() === 21) {
-  //   console.log("You've got 21!")
-  // } else {
-  //   while (plScore() < 21) {
-  //
-  //   }
-  // }
+  function plNextCard() {
+    if (plScore() > 21) {
+      console.log("You've lost.")
+    } else if (plScore() === 21) {
+      console.log('You made it to 21! lets see...')
+    } else {
+      let next = window.confirm('Would you like another card?')
+      if (next) {
+        let nextPl = Math.floor(Math.random() * 12) + 1;
+        console.log(nextPl);
+        plCards.push(nextPl);
+        plNextCard();
+      }
+    }
+    return plCards;
+  }
+
+  console.log(plNextCard());
+  console.log(plScore());
+
+  // Buenooooo, parece que me salio la recursive function!
+  // Con esto terminariamos la mano del PL y empezariamos la del DL.
+
+  function dlGame() {
+    if (plScore() > 21) {
+      console.log('The house wins.');
+    } else {
+      let nextDl = Math.floor(Math.random() * 12) + 1;
+      console.log(nextDl);
+      dlCards.push(nextDl);
+      if (dlScore() === 21 || dlScore() === plScore()) {
+        console.log('The house wins!');
+      } else if (dlScore() > 21) {
+        console.log('The house loses!');
+      } else if (dlScore() < 21 && dlScore() > plScore()) {
+        console.log(dlScore())
+        console.log('The house wins!');
+      } else if (dlScore() < 21 && dlScore() < plScore()) {
+        console.log(dlScore())
+        dlGame();
+      }  
+    }
+    return dlCards;
+  }
+
+  console.log(dlGame());
+  console.log(dlScore());
+
+  // Parece que el dlGame esta funcionando!
+  // Aguanten las funciones recursivas chabonnnnn
 }
