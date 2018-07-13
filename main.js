@@ -60,11 +60,24 @@ function blackjack() {
     if (plScore() === 21) {
       console.log('Blackjack!')
     } else {
-      let third = window.confirm('Would you like another card?')
-      if (third) {
-        let thirdPl = Math.floor(Math.random() * 12) + 1;
-        plCards.push(thirdPl);
+      function plNextCard() {
+        if (plScore() > 21) {
+          console.log("You've lost.")
+        } else if (plScore() === 21) {
+          console.log('You made it to 21! lets see...')
+        } else {
+          let next = window.confirm('Would you like another card?')
+          if (next) {
+            let nextPl = Math.floor(Math.random() * 12) + 1;
+            console.log(nextPl);
+            plCards.push(nextPl);
+            console.log(plScore())
+            plNextCard();
+          }
+        }
+        return plCards;
       }
+      console.log(plNextCard())
     }
     return plCards;
   }
@@ -78,25 +91,25 @@ function blackjack() {
   // plNextCard() porque no es necesaria. (si bien si se ejecuta no hay
   // drama porque simplemente devuelve que llegaste a 21, pero...)
 
-  function plNextCard() {
-    if (plScore() > 21) {
-      console.log("You've lost.")
-    } else if (plScore() === 21) {
-      console.log('You made it to 21! lets see...')
-    } else {
-      let next = window.confirm('Would you like another card?')
-      if (next) {
-        let nextPl = Math.floor(Math.random() * 12) + 1;
-        console.log(nextPl);
-        plCards.push(nextPl);
-        plNextCard();
-      }
-    }
-    return plCards;
-  }
+  // function plNextCard() {
+  //   if (plScore() > 21) {
+  //     console.log("You've lost.")
+  //   } else if (plScore() === 21) {
+  //     console.log('You made it to 21! lets see...')
+  //   } else {
+  //     let next = window.confirm('Would you like another card?')
+  //     if (next) {
+  //       let nextPl = Math.floor(Math.random() * 12) + 1;
+  //       console.log(nextPl);
+  //       plCards.push(nextPl);
+  //       plNextCard();
+  //     }
+  //   }
+  //   return plCards;
+  // }
 
-  console.log(plNextCard());
-  console.log(plScore());
+  // console.log(plNextCard());
+  // console.log(plScore());
 
   // Buenooooo, parece que me salio la recursive function!
   // Con esto terminariamos la mano del PL y empezariamos la del DL.
