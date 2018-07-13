@@ -8,6 +8,8 @@ function blackjack() {
         score += 10;
       } else if (dlCards[i] === 1) {
         score += 11;
+        // Despues de jugar un par de manos me di cuenta que debido a esto,
+        // si saco 2 ases pierdo el juego instantaneamente. Muy mal.
       } else {
         score += dlCards[i];
       }
@@ -95,15 +97,16 @@ function blackjack() {
       let nextDl = Math.floor(Math.random() * 12) + 1;
       console.log(nextDl);
       dlCards.push(nextDl);
-      if (dlScore() === 21 || dlScore() === plScore()) {
-        // el problema que tengo aca es que el DL tiene solamente una chance
-        // para empatar (y por tanto ganar) cuando PL hace blackjack,
-        // y con este codigo si llega a 21 sin hacer blackjack, a pesar de
-        // que PL haya hecho blackjack, gana DL.
-        console.log('The house wins!');
+      if (dlScore() === 21 && dlCards.length === 2) {
+        console.log('The house scores a blackjack and wins!');
+        // Si DL hace blackjack gana;
+      } else if (plScore() === 21 && plCards.length === 2) {
+        console.log('The players blackjack takes the game!')
+        // Si PL hace blackjack y DL no, se termina la jugada de DL con
+        // su segunda carta y no es necesario que siga jugando
       } else if (dlScore() > 21) {
         console.log('The house loses!');
-      } else if (dlScore() < 21 && dlScore() > plScore()) {
+      } else if (dlScore() <= 21 && dlScore() >= plScore()) {
         console.log(dlScore())
         console.log('The house wins!');
       } else if (dlScore() < 21 && dlScore() < plScore()) {
