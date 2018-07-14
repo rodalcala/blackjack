@@ -79,14 +79,30 @@ function blackjack() {
         } else if (plScore() === 21) {
           console.log('You made it to 21! lets see...')
         } else {
-          let next = window.confirm('Would you like another card?')
-          if (next) {
+          // let next = window.confirm('Would you like another card?')
+          // if (next) {
+          let anotherCard = undefined;
+          // Hacemos que cada vez que se ejecute la funcion el valor de la
+          // variable anotherCard vuelva a undefined para que no se genere
+          // un loop infinito de sacar cartas hasta que plScore() > 21;
+          var hitButton = document.getElementById('hit');
+          hitButton.addEventListener('click', function next() {
+            anotherCard = true;
+            }
+          )
+          var standButton = document.getElementById('stand');
+          standButton.addEventListener('click', function next() {
+            anotherCard = false;
+            }
+          )
+          if (anotherCard) {
             let nextPl = Math.floor(Math.random() * 12) + 1;
             console.log(nextPl);
             plCards.push(nextPl);
             console.log(plScore())
             plNextCard();
           }
+          // }
         }
         return plCards;
       }
