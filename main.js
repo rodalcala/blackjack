@@ -8,10 +8,16 @@ function blackjack() {
         score += 10;
       } else if (dlCards[i] === 1) {
         score += 11;
-        // Despues de jugar un par de manos me di cuenta que debido a esto,
-        // si saco 2 ases pierdo el juego instantaneamente. Muy mal.
       } else {
         score += dlCards[i];
+      }
+    }
+    for(let i = 0; i < dlCards.length; i++) {
+      if (score > 21 && dlCards[i] === 1) {
+        console.log('fix As');
+        score -= 10;
+        // for loop para solucionar el valor del As y que cambie de 11 a 1
+        // segun la ocacion
       }
     }
     return score;
@@ -27,12 +33,17 @@ function blackjack() {
         score += plCards[i];
       }
     }
+    for (var i = 0; i < plCards.length; i++) {
+      if (score > 21 && plCards[i] === 1) {
+        console.log("fix As");
+        score -= 10;
+      }
+    }
     return score;
   };
 
   // Hasta aca definimos las variables que van a contener las cartas de cada
   // jugador y los puntajes de cada uno (que dependen de las cartas)
-  // Por ahora el as (1) = 11;
 
   function dlFirstCard() {
     let firstDl = Math.floor(Math.random() * 12) + 1;
