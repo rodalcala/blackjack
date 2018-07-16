@@ -3,7 +3,7 @@ function blackjack() {
   let plCards = [];
   let dlScore = function() {
     let score = 0;
-    for(let i = 0; i < dlCards.length; i++) {
+    for (let i = 0; i < dlCards.length; i++) {
       if (dlCards[i] === 10 || dlCards[i] === 11 || dlCards[i] === 12) {
         score += 10;
       } else if (dlCards[i] === 1) {
@@ -12,7 +12,7 @@ function blackjack() {
         score += dlCards[i];
       }
     }
-    for(let i = 0; i < dlCards.length; i++) {
+    for (let i = 0; i < dlCards.length; i++) {
       if (score > 21 && dlCards[i] === 1) {
         console.log('fix As');
         score -= 10;
@@ -20,13 +20,11 @@ function blackjack() {
         // segun la ocacion
       }
     }
-    //Print dealer score in html
-    document.getElementById('dealerScore').textContent = score;
     return score;
   };
   let plScore = function() {
     let score = 0;
-    for(let i = 0; i < plCards.length; i++) {
+    for (let i = 0; i < plCards.length; i++) {
       if (plCards[i] === 10 || plCards[i] === 11 || plCards[i] === 12) {
         score += 10;
       } else if (plCards[i] === 1) {
@@ -41,8 +39,6 @@ function blackjack() {
         score -= 10;
       }
     }
-    //Print player score in html
-    document.getElementById('playerScore').textContent = score ;
     return score;
   };
 
@@ -53,26 +49,10 @@ function blackjack() {
   function dlFirstCard() {
     let firstDl = Math.floor(Math.random() * 12) + 1;
     dlCards.push(firstDl);
-
-
-  //Print dealer first card in html
-  //Creamos un LI element
-  var li = document.createElement('LI');
-  //Creamos una variable para su contenido
-  var dealerFirst = document.createTextNode(firstDl);
-  //Anadimos el contenido al LI
-  li.appendChild(dealerFirst);
-  //Creamos una variable para apuntar al UL donde vamos a instertar el LI
-  var ul = document.querySelector('#dealer ul');
-  //Anadimos el LI al UL
-  ul.appendChild(li);
-  //
-
-    return firstDl;
   }
 
-
   console.log(dlFirstCard());
+  console.log(dlCards);
   console.log(dlScore());
 
   // Generamos y mostramos la primer carta de DL;
@@ -82,10 +62,10 @@ function blackjack() {
     let secondPl = Math.floor(Math.random() * 12) + 1;
     plCards.push(firstPl);
     plCards.push(secondPl);
-    return plCards;
   }
 
   console.log(plHand());
+  console.log(plCards);
   console.log(plScore());
 
   // Generamos y mostramos las dos primeras cartas de PL;
@@ -105,29 +85,18 @@ function blackjack() {
             let nextPl = Math.floor(Math.random() * 12) + 1;
             console.log(nextPl);
             plCards.push(nextPl);
+            console.log(plCards);
             console.log(plScore())
             plNextCard();
           }
         }
-        return plCards;
       }
-      console.log(plNextCard())
+      plNextCard();
     }
-      //Print dealer first card in html
-      //Con un for loop, iteramos por todos los elementos del array plCards
-    for (var i = 0; i < plCards.length; i++) {
-        //Creamos un LI element
-        var li = document.createElement('li');
-        //Creamos una variable para el contenido de cada LI
-        li.appendChild(document.createTextNode(plCards[i]));
-        //Anadimos los LI al UL
-        document.querySelector('#player ul').appendChild(li);
-    }
-
-    return plCards;
   }
 
-  console.log(plGame());
+  plGame();
+  console.log(plCards);
   console.log(plScore());
 
   // Buenooooo, parece que me salio la recursive function!
@@ -139,22 +108,7 @@ function blackjack() {
     } else {
       let nextDl = Math.floor(Math.random() * 12) + 1;
       console.log(nextDl);
-
-      //Print dealer next card in html
-      //Creamos un LI element
-      var li = document.createElement('LI');
-      //Creamos una variable para su contenido
-      var dealerNext = document.createTextNode(nextDl);
-      //Anadimos el contenido al LI
-      li.appendChild(dealerNext);
-      //Creamos una variable para apuntar al UL donde vamos a instertar el LI
-      var ul = document.querySelector('#dealer ul');
-      //Anadimos el LI al UL
-      ul.appendChild(li);
-      //
-
       dlCards.push(nextDl);
-
       if (dlScore() === 21 && dlCards.length === 2) {
         console.log('The house scores a blackjack and wins!');
         // Si DL hace blackjack gana;
@@ -165,17 +119,15 @@ function blackjack() {
       } else if (dlScore() > 21) {
         console.log('The house loses!');
       } else if (dlScore() <= 21 && dlScore() >= plScore()) {
-        console.log(dlScore())
         console.log('The house wins!');
       } else if (dlScore() < 21 && dlScore() < plScore()) {
-        console.log(dlScore())
         dlGame();
       }
     }
-    return dlCards;
   }
 
   console.log(dlGame());
+  console.log(dlCards);
   console.log(dlScore());
 
   // Parece que el dlGame esta funcionando!
@@ -183,13 +135,3 @@ function blackjack() {
 }
 
 blackjack();
-
-var playButton = document.getElementById('playAgain');
-playButton.addEventListener('click', function next() {
-  blackjack();
-  }
-)
-
-// Agregue un boton para volver a jugar pero tiene un error porque en vez de mostrar solamente las nuevas
-// cartas de los players, muestra las viejas mas las nuevas. O sea que despues de un par de juegos tenes
-// una lista enorme de cartas que no tiene sentido.
