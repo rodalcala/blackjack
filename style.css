@@ -1,0 +1,140 @@
+/*Gral settings*/
+body{
+    background-color: #5fa541;
+    text-align: center;
+    font-family: 'Archivo Narrow', sans-serif;
+    letter-spacing: 2px;
+}
+
+#mainWrapper{
+    text-align: center;
+    margin: auto;
+    background-color: #f0ac99;
+    width: 60%;
+    padding: 2%;
+    border-radius: 7px; 
+}
+
+/*Title*/
+
+h1{
+    font-size: 2.5em;
+}
+
+/*Dealer*/
+
+#dealer{
+    font-size: 1.5em;
+    font-weight: bolder;
+    margin-right:0.5%; 
+}
+
+
+#dealer p {
+    color: #f80749;
+    -webkit-text-stroke-width: 0.1px;
+    -webkit-text-stroke-color: black;
+    border: 1px solid #e66159;
+    padding: 1.1%;
+}
+
+#dealerScore{
+    color:black;
+    background-color: #ffffff;
+    display: inline-block;
+    width: 26px;
+}
+/*Player*/
+
+#player{
+    font-size: 1.5em;
+    font-weight: bolder;
+}
+
+#player p {
+    color: #f80749;
+    -webkit-text-stroke-width: 0.1px;
+    -webkit-text-stroke-color: black;
+    border: 1px solid #e66159;
+    padding: 1.1%;
+}
+
+#playerScore{
+    color:black;
+    background-color: #ffffff;
+    display: inline-block;
+    width: 25px;
+}
+
+/* Gral set up for UL */
+
+ul {
+    list-style-type: none;
+    margin: -5%;
+    text-align: center;
+    background-color: #ffdfef;
+    width: auto;
+    min-width: 200px;
+    max-width: 400px;
+    min-height: 10%;
+    margin: auto;
+    padding: 2% 8% ;
+    border-radius: 5px;
+    vertical-align: middle;
+}
+
+/* Gral set up for LI/ cards */
+li{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 4%;
+    background-color: #ffffff;
+    border: 2px solid black;
+    border-radius: 2px;
+    width: 35px;
+    height: 55px;
+    font-weight: bolder;
+}
+
+/* Middle text style*/
+
+.middleText
+{
+    display: inline-block;
+    margin: 2%
+}
+
+/*Central messeges*/
+
+#msjs{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    font-size: 1.3em;
+    font-weight: 600; 
+    background-color: #ffffce;
+    min-width: 50%;
+    min-height: 90px;
+    border-radius: 2px;
+}
+
+/*buttons*/
+
+button{
+    margin: 1%;
+    padding: 0.5%;
+    font-weight: bold;
+}
+
+#playAgain{
+    display: block;
+    margin: auto;
+}
+
+
+
+
+
+
