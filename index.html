@@ -2,7 +2,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow" rel="stylesheet">
 
     <title>Blackjack</title>
 </head>
@@ -11,23 +13,27 @@
     <div id ="mainWrapper">
         <div id="content">
             <div id="dealer">
-                <h3>Dealer cards:</h3>
-                <p>The dealer got:</p>
                 <ul>
                 </ul>
-                <p>Score: <span id="dealerScore"></span></p>
+                <h3 class="middleText" >Dealer</h3>
+                <p class="middleText">Score: <span id="dealerScore">-</span></p>
+            </div>
+            <div id="msjs">
+                <p id="centralMsj">  </p>
             </div>
             <div id="player">
-                <h3>Player cards:</h3>
-                <p>The player got:</p>
+                <h3 class="middleText">Player</h3>
+                <p class="middleText">Score: <span id="playerScore">-</span></p>
                 <ul>
                 </ul>
-                <p>Score: <span id="playerScore"></span></p>
-                <button id="anotherCard">Ask for another card</button>
+                
             </div>
-            <button id="playAgain">Play again</button>
         </div>
     </div>
+    <button id="hit">Hit</button>
+    <button id="stand">Stand</button>
+    <button id="playAgain">Play again</button>
+
 </div>
 
 <script src="main.js"></script>
