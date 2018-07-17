@@ -13,12 +13,13 @@ let dlScore = function() {
   }
   for (let i = 0; i < dlCards.length; i++) {
     if (score > 21 && dlCards[i] === 1) {
-      console.log('fix As');
       score -= 10;
       // for loop para solucionar el valor del As y que cambie de 11 a 1
       // segun la ocacion
     }
   }
+  //Print dealer score in html
+  document.getElementById('dealerScore').textContent = score;
   return score;
 };
 let plScore = function() {
@@ -34,10 +35,11 @@ let plScore = function() {
   }
   for (var i = 0; i < plCards.length; i++) {
     if (score > 21 && plCards[i] === 1) {
-      console.log("fix As");
       score -= 10;
     }
   }
+  //Print player score in html
+  document.getElementById('playerScore').textContent = score;
   return score;
 };
 
@@ -58,6 +60,44 @@ function plHand() {
   plCards.push(firstPl);
   plCards.push(secondPl);
   // las agragamos a la mano del PL
+}
+
+function printPl() {
+  //Print player firsts cards in html
+  //Con un for loop, iteramos por todos los elementos del array plCards
+  for (var i = 0; i < plCards.length; i++) {
+    //Creamos un LI element
+    var li = document.createElement('li');
+    //Creamos una variable para el contenido de cada LI
+    li.appendChild(document.createTextNode(plCards[i]));
+    //Anadimos los LI al UL
+    document.querySelector('#player ul').appendChild(li);
+  }
+}
+
+function erasePl() {
+  while(document.querySelector('#player ul').firstChild){
+    document.querySelector('#player ul').removeChild(document.querySelector('#player ul').firstChild);
+  }
+}
+
+function printDl() {
+  //Print dealer firsts cards in html
+  //Con un for loop, iteramos por todos los elementos del array plCards
+  for (var i = 0; i < dlCards.length; i++) {
+    //Creamos un LI element
+    var li = document.createElement('li');
+    //Creamos una variable para el contenido de cada LI
+    li.appendChild(document.createTextNode(dlCards[i]));
+    //Anadimos los LI al UL
+    document.querySelector('#dealer ul').appendChild(li);
+  }
+}
+
+function eraseDl() {
+  while(document.querySelector('#dealer ul').firstChild){
+    document.querySelector('#dealer ul').removeChild(document.querySelector('#dealer ul').firstChild);
+  }
 }
 
 let anotherCard = undefined;
@@ -86,6 +126,9 @@ function plGame() {
     // la imprimimos
     plCards.push(nextPl);
     // la sumamos a la mano del PL
+    erasePl();
+    printPl();
+    // la imprimimos en html
     console.log(plCards)
     console.log(plScore())
     // imprimimos la mano y el puntaje
@@ -112,6 +155,8 @@ function dlGame() {
     let nextDl = Math.floor(Math.random() * 12) + 1;
     console.log(nextDl);
     dlCards.push(nextDl);
+    eraseDl();
+    printDl();
 
     if (dlScore() === 21 && dlCards.length === 2) {
       console.log('The house scores a blackjack and wins!');
@@ -140,11 +185,16 @@ function startGame() {
   plCards = [];
   // Seteamos las manos de los jugares a arrays vacios para empezar
   dlFirstCard();
+  eraseDl();
+  printDl();
   console.log(dlCards);
   console.log(dlScore());
   // Ejecutamos la funcion que determina la primer carta del DL e imprimimos
   // cual es y que puntaje consigue.
   plHand();
+  erasePl();
+  printPl();
+  // Imprimimos las cartas en HTML
   console.log(plCards);
   console.log(plScore());
   // Ejecutamos la funcion que determina las dos primeras cartas del PL e
@@ -161,4 +211,4 @@ function startGame() {
 var playButton = document.getElementById('playAgain');
 playButton.addEventListener('click', function next() {
   startGame();
-}
+})
