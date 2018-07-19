@@ -44,18 +44,18 @@ let plScore = function() {
 };
 
 // Definimos el palo de cada carta
-function getSuit() {
-  let suit = Math.floor(Math.random() * 4);
-  if (suit === 0) {
-    return '♦️';
-  } else if (suit === 1) {
-    return '♣️';
-  } else if (suit === 2) {
-    return '♠️';
-  } else if (suit === 3) {
-    return '♥️';
-  }
-}
+// function getSuit() {
+//   let suit = Math.floor(Math.random() * 4);
+//   if (suit === 0) {
+//     return '♦️';
+//   } else if (suit === 1) {
+//     return '♣️';
+//   } else if (suit === 2) {
+//     return '♠️';
+//   } else if (suit === 3) {
+//     return '♥️';
+//   }
+// }
 
 // Hasta aca definimos las variables que van a contener las cartas de cada
 // jugador y los puntajes de cada uno (que dependen de las cartas)
@@ -85,15 +85,15 @@ function printPl() {
     //Creamos una variable para el contenido de cada LI y
     //cambiamos el valor de las cartas para mostrar A, J, Q y K
     if (plCards[i] === 1) {
-      li.appendChild(document.createTextNode(getSuit() + 'A'));
+      li.appendChild(document.createTextNode('A'));
     } else if (plCards[i] === 10) {
-      li.appendChild(document.createTextNode(getSuit() + 'J'));
+      li.appendChild(document.createTextNode('J'));
     } else if (plCards[i] === 11) {
-      li.appendChild(document.createTextNode(getSuit() + '👸'));
+      li.appendChild(document.createTextNode('👸'));
     } else if (plCards[i] === 12) {
-      li.appendChild(document.createTextNode(getSuit() + '🤴'));
+      li.appendChild(document.createTextNode('🤴'));
     } else {
-      li.appendChild(document.createTextNode(getSuit() + plCards[i]));
+      li.appendChild(document.createTextNode(+ plCards[i]));
     }
     //Anadimos los LI al UL
     document.querySelector('#player ul').appendChild(li);
@@ -115,15 +115,15 @@ function printDl() {
     //Creamos una variable para el contenido de cada LI y
     //cambiamos el valor de las cartas para mostrar A, J, Q y K
     if (dlCards[i] === 1) {
-      li.appendChild(document.createTextNode(getSuit() + 'A'));
+      li.appendChild(document.createTextNode('A'));
     } else if (dlCards[i] === 10) {
-      li.appendChild(document.createTextNode(getSuit() + 'J'));
+      li.appendChild(document.createTextNode('J'));
     } else if (dlCards[i] === 11) {
-      li.appendChild(document.createTextNode(getSuit() + '👸'));
+      li.appendChild(document.createTextNode('👸'));
     } else if (dlCards[i] === 12) {
-      li.appendChild(document.createTextNode(getSuit() + '🤴'));
+      li.appendChild(document.createTextNode('🤴'));
     } else {
-      li.appendChild(document.createTextNode(getSuit() + dlCards[i]));
+      li.appendChild(document.createTextNode(dlCards[i]));
     }
     //Anadimos los LI al UL
     document.querySelector('#dealer ul').appendChild(li);
