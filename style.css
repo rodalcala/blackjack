@@ -1,6 +1,6 @@
 /*Gral settings*/
 body{
-    background-color: #5fa541;
+    background-color: #66a3ff;
     text-align: center;
     font-family: 'Archivo Narrow', sans-serif;
     letter-spacing: 2px;
@@ -9,10 +9,10 @@ body{
 #mainWrapper{
     text-align: center;
     margin: auto;
-    background-color: #f0ac99;
+    background-color: #404040;
     width: 60%;
     padding: 2%;
-    border-radius: 7px; 
+    border-radius: 7px;
 }
 
 /*Title*/
@@ -26,15 +26,15 @@ h1{
 #dealer{
     font-size: 1.5em;
     font-weight: bolder;
-    margin-right:0.5%; 
+    margin-right:0.5%;
 }
 
 
 #dealer p {
-    color: #f80749;
+    color: #009933;
     -webkit-text-stroke-width: 0.1px;
     -webkit-text-stroke-color: black;
-    border: 1px solid #e66159;
+    border: 1px solid #DCDCDC;
     padding: 1.1%;
 }
 
@@ -42,7 +42,8 @@ h1{
     color:black;
     background-color: #ffffff;
     display: inline-block;
-    width: 26px;
+    width: 25px;
+    padding: 1%;
 }
 /*Player*/
 
@@ -52,10 +53,10 @@ h1{
 }
 
 #player p {
-    color: #f80749;
+    color: #009933;
     -webkit-text-stroke-width: 0.1px;
     -webkit-text-stroke-color: black;
-    border: 1px solid #e66159;
+    border: 1px solid #DCDCDC;
     padding: 1.1%;
 }
 
@@ -64,6 +65,7 @@ h1{
     background-color: #ffffff;
     display: inline-block;
     width: 25px;
+    padding: 1%;
 }
 
 /* Gral set up for UL */
@@ -72,7 +74,7 @@ ul {
     list-style-type: none;
     margin: -5%;
     text-align: center;
-    background-color: #ffdfef;
+    background-color: #b3e6ff;
     width: auto;
     min-width: 200px;
     max-width: 400px;
@@ -92,8 +94,8 @@ li{
     background-color: #ffffff;
     border: 2px solid black;
     border-radius: 2px;
-    width: 35px;
-    height: 55px;
+    width: 65px;
+    height: 45px;
     font-weight: bolder;
 }
 
@@ -102,6 +104,7 @@ li{
 .middleText
 {
     display: inline-block;
+    width: 20%;
     margin: 2%
 }
 
@@ -113,7 +116,7 @@ li{
     justify-content: center;
     width: auto;
     font-size: 1.3em;
-    font-weight: 600; 
+    font-weight: 600;
     background-color: #ffffce;
     min-width: 50%;
     min-height: 90px;
@@ -128,13 +131,7 @@ button{
     font-weight: bold;
 }
 
-#playAgain{
+#play{
     display: block;
     margin: auto;
 }
-
-
-
-
-
-

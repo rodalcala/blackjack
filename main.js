@@ -43,6 +43,20 @@ let plScore = function() {
   return score;
 };
 
+// Definimos el palo de cada carta
+function getSuit() {
+  let suit = Math.floor(Math.random() * 4);
+  if (suit === 0) {
+    return '♦️';
+  } else if (suit === 1) {
+    return '♣️';
+  } else if (suit === 2) {
+    return '♠️';
+  } else if (suit === 3) {
+    return '♥️';
+  }
+}
+
 // Hasta aca definimos las variables que van a contener las cartas de cada
 // jugador y los puntajes de cada uno (que dependen de las cartas)
 
@@ -63,39 +77,61 @@ function plHand() {
 }
 
 function printPl() {
-  //Print player firsts cards in html
+  //Print player cards in html
   //Con un for loop, iteramos por todos los elementos del array plCards
   for (var i = 0; i < plCards.length; i++) {
     //Creamos un LI element
     var li = document.createElement('li');
-    //Creamos una variable para el contenido de cada LI
-    li.appendChild(document.createTextNode(plCards[i]));
+    //Creamos una variable para el contenido de cada LI y
+    //cambiamos el valor de las cartas para mostrar A, J, Q y K
+    if (plCards[i] === 1) {
+      li.appendChild(document.createTextNode(getSuit() + 'A'));
+    } else if (plCards[i] === 10) {
+      li.appendChild(document.createTextNode(getSuit() + 'J'));
+    } else if (plCards[i] === 11) {
+      li.appendChild(document.createTextNode(getSuit() + '👸'));
+    } else if (plCards[i] === 12) {
+      li.appendChild(document.createTextNode(getSuit() + '🤴'));
+    } else {
+      li.appendChild(document.createTextNode(getSuit() + plCards[i]));
+    }
     //Anadimos los LI al UL
     document.querySelector('#player ul').appendChild(li);
   }
 }
 
 function erasePl() {
-  while(document.querySelector('#player ul').firstChild){
+  while (document.querySelector('#player ul').firstChild) {
     document.querySelector('#player ul').removeChild(document.querySelector('#player ul').firstChild);
   }
 }
 
 function printDl() {
-  //Print dealer firsts cards in html
+  //Print dealer cards in html
   //Con un for loop, iteramos por todos los elementos del array plCards
   for (var i = 0; i < dlCards.length; i++) {
     //Creamos un LI element
     var li = document.createElement('li');
-    //Creamos una variable para el contenido de cada LI
-    li.appendChild(document.createTextNode(dlCards[i]));
+    //Creamos una variable para el contenido de cada LI y
+    //cambiamos el valor de las cartas para mostrar A, J, Q y K
+    if (dlCards[i] === 1) {
+      li.appendChild(document.createTextNode(getSuit() + 'A'));
+    } else if (dlCards[i] === 10) {
+      li.appendChild(document.createTextNode(getSuit() + 'J'));
+    } else if (dlCards[i] === 11) {
+      li.appendChild(document.createTextNode(getSuit() + '👸'));
+    } else if (dlCards[i] === 12) {
+      li.appendChild(document.createTextNode(getSuit() + '🤴'));
+    } else {
+      li.appendChild(document.createTextNode(getSuit() + dlCards[i]));
+    }
     //Anadimos los LI al UL
     document.querySelector('#dealer ul').appendChild(li);
   }
 }
 
 function eraseDl() {
-  while(document.querySelector('#dealer ul').firstChild){
+  while (document.querySelector('#dealer ul').firstChild) {
     document.querySelector('#dealer ul').removeChild(document.querySelector('#dealer ul').firstChild);
   }
 }
@@ -115,6 +151,9 @@ standButton.addEventListener('click', function next() {
   // cambiamos el valor de anotherCard para no pedir mas cartas y
   // ejecutamos dlGame() ya que el turno del PL se saltea;
   dlGame();
+  // Deshabilitamos los botones de hit y stand ya que el juego del PL terminó
+  document.getElementById("stand").disabled = true;
+  document.getElementById("hit").disabled = true;
 })
 
 function plGame() {
@@ -123,7 +162,7 @@ function plGame() {
     let nextPl = Math.floor(Math.random() * 12) + 1;
     // la generamos
     console.log(nextPl);
-    // la imprimimos
+    // la imprimimos en consola
     plCards.push(nextPl);
     // la sumamos a la mano del PL
     erasePl();
@@ -131,19 +170,25 @@ function plGame() {
     // la imprimimos en html
     console.log(plCards)
     console.log(plScore())
-    // imprimimos la mano y el puntaje
+    // imprimimos la mano y el puntaje en consola
     anotherCard = undefined;
     // y seteamos la variable anotherCard de nuevo a undefined para que
     // el PL pueda elegir nuevamente entre 'hit' y 'stand' de ser necesario
     if (plScore() > 21) {
       // Apagamos los botones de 'hit' y 'stand' y se termina la partida.
       console.log("You've lost.")
-      document.querySelector("#centralMsj").textContent = "You've lost";
+      document.querySelector("#centralMsj").textContent = "Busted! you've lost.";
+      // Deshabilitamos los botones de hit y stand ya que el juego del PL terminó
+      document.getElementById("stand").disabled = true;
+      document.getElementById("hit").disabled = true;
     } else if (plScore() === 21) {
       console.log('You made it to 21! lets see...')
       document.querySelector("#centralMsj").textContent = 'You made it to 21! lets see...';
+      // Deshabilitamos los botones de hit y stand ya que el juego del PL terminó
+      document.getElementById("stand").disabled = true;
+      document.getElementById("hit").disabled = true;
       // Ejecutamos el juego del DL.
-      dlGame();
+      setTimeout(dlGame, 2000);
     }
   }
 }
@@ -151,37 +196,33 @@ function plGame() {
 function dlGame() {
   // Una vez que se ejecuta esta funcion habria que "apagar" los botones
   // de pedir carta y de plantarse porque el usuario ya no puede interactuar.
-  if (plScore() > 21) {
-    console.log('The house wins.');
-  } else {
-    let nextDl = Math.floor(Math.random() * 12) + 1;
-    console.log(nextDl);
-    dlCards.push(nextDl);
-    eraseDl();
-    printDl();
+  // Lo hice antes de llamar la funcion;
+  let nextDl = Math.floor(Math.random() * 12) + 1;
+  console.log(nextDl);
+  dlCards.push(nextDl);
+  eraseDl();
+  printDl();
 
-
-    if (dlScore() === 21 && dlCards.length === 2) {
-      console.log('The house scores a blackjack and wins!');
-      document.querySelector("#centralMsj").textContent = 'The house scores a blackjack and wins!';
-      // Si DL hace blackjack gana;
-    } else if (plScore() === 21 && plCards.length === 2) {
-      console.log('The players blackjack takes the game!')
-      document.querySelector("#centralMsj").textContent = 'The players blackjack takes the game!';
-      // Si PL hace blackjack y DL no, se termina la jugada de DL con
-      // su segunda carta y no es necesario que siga jugando
-    } else if (dlScore() > 21) {
-      console.log('The house loses!');
-      document.querySelector("#centralMsj").textContent = 'The house loses!';
-    } else if (dlScore() <= 21 && dlScore() >= plScore()) {
-      console.log(dlScore())
-      console.log('The house wins!');
-      document.querySelector("#centralMsj").textContent = 'The house wins!';
-    } else if (dlScore() < 21 && dlScore() < plScore()) {
-      console.log(dlScore())
-      dlGame();
-      // Aguanten las funciones recursivas chabonnnnn
-    }
+  if (dlScore() === 21 && dlCards.length === 2) {
+    console.log('The house scores a blackjack and wins!');
+    document.querySelector("#centralMsj").textContent = 'The house scores a blackjack and wins!';
+    // Si DL hace blackjack gana;
+  } else if (plScore() === 21 && plCards.length === 2) {
+    console.log('The players blackjack takes the game!')
+    document.querySelector("#centralMsj").textContent = 'Your blackjack takes the game!';
+    // Si PL hace blackjack y DL no, se termina la jugada de DL con
+    // su segunda carta y no es necesario que siga jugando
+  } else if (dlScore() > 21) {
+    console.log('The house loses!');
+    document.querySelector("#centralMsj").textContent = 'The house got busted! you win!';
+  } else if (dlScore() <= 21 && dlScore() >= plScore()) {
+    console.log(dlScore())
+    console.log('The house wins!');
+    document.querySelector("#centralMsj").textContent = 'The house wins!';
+  } else if (dlScore() < 21 && dlScore() < plScore()) {
+    console.log(dlScore())
+    setTimeout(dlGame, 700);
+    // Aguanten las funciones recursivas chabonnnnn
   }
   console.log(dlCards);
   console.log(dlScore());
@@ -207,15 +248,21 @@ function startGame() {
   // Ejecutamos la funcion que determina las dos primeras cartas del PL e
   // imprimimos cuales son y que puntaje consigue.
   if (plScore() === 21) {
-    console.log('Blackjack!');
+    document.querySelector("#centralMsj").textContent = 'Blackjack!';
     // Si de entrada PL saca un Blackjack lo imprimimos en pantalla e
     // inmediatamente ejecutamos la jugada del DL para ver si saca
     // un blackjack tambien.
-    dlGame();
+    // Delay de 1 seg para que se imprima el Blackjack y dsp se borre;
+    setTimeout(dlGame, 3000);
   }
 }
 
-var playButton = document.getElementById('playAgain');
+var playButton = document.getElementById('play');
 playButton.addEventListener('click', function next() {
   startGame();
+  // Habilitamos los botones de hit y stand una vez la partida empieza
+  document.getElementById("stand").disabled = false;
+  document.getElementById("hit").disabled = false;
+  document.getElementById("play").innerHTML = "Start again";
+  document.querySelector("#centralMsj").textContent = '';
 })
